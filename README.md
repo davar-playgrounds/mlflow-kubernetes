@@ -7,8 +7,8 @@ MLFlow docker image and manifest for deployment in Kubernetes with configuration
 ## Image
 
 ```
-docker build -t registry/mlflow:latest ./image
-docker push registry/mlflow:latest
+docker build -t docker.pkg.github.com/kongzii/mlflow-kubernetes/mlflow:latest ./image
+docker push docker.pkg.github.com/kongzii/mlflow-kubernetes/mlflow:latest
 ```
 
 ## Required setting
