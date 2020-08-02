@@ -1,0 +1,16 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: mlflow
+  namespace: your-namespace
+  labels:
+    app: mlflow
+spec:
+  rules:
+    - host: mlflow-tracking-uri
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: mlflow
+              servicePort: 5000
