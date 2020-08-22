@@ -1,24 +1,10 @@
-# MLFlow for Kubernetes
+# HELM for MLFlow
 
-MLFlow docker image and manifest for deployment in Kubernetes with configuration for SQLite database.
+MLFlow docker image and helm chart for deployment in Kubernetes with configuration for SQLite database and S3 storage.
 
 # Installation
 
-## Image
-
-```
-docker build -t docker.pkg.github.com/kongzii/mlflow-kubernetes/mlflow:latest ./image
-docker push docker.pkg.github.com/kongzii/mlflow-kubernetes/mlflow:latest
-```
-
-## Required setting
-
-- Edit `MLFLOW_TRACKING_URI` in `configmap.yaml` and `host` in `ingress.yaml`.
-- Edit `MLFLOW_S3_ENDPOINT_URL` in `configmap.yaml`.
-- Edit `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` in `configmap.yaml`.
-- Edit `your-namespace` to actual name of your namespace in all files.
-
-## S3 Bucket
+## Create S3 Bucket
 
 Make S3 Bucket for MLFlow if it does not exists yet.
 
@@ -26,14 +12,14 @@ Make S3 Bucket for MLFlow if it does not exists yet.
 s3cmd mb s3:///mlflow
 ```
 
-## PVC for SQLite database
+## Install with helm
 
 ```
-kubectl -n your-namespace apply -f ./manifests/pvc
-```
-
-## MLFlow server
-
-```
-kubectl -n your-namespace apply -f ./manifests/server
+helm install \                                      
+    --set pvc.size=100Gi \                       
+    --set ingress.host=ingress.host \
+    --set mlflow.s3_endpoint_url=s3.heu.cz \
+    --set mlflow.aws_access_key_id=aws_access_key_id \
+    --set mlflow.aws_secret_access_key=aws_secret_access_key \
+    mlflow mlflow/
 ```
