@@ -1,0 +1,47 @@
+# Default values for mlflow.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+mlflow:
+  s3_endpoint_url: _SET
+  aws_access_key_id: _SET
+  aws_secret_access_key: _SET
+  workers: 4
+
+pvc:
+  enabled: true
+  keep: true
+  size: 10Gi
+
+image:
+  repository: jungninja/mlflow
+  pullPolicy: IfNotPresent
+  tag: ""
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+podAnnotations: {}
+
+podSecurityContext: {}
+
+securityContext: {}
+  
+service:
+  type: ClusterIP
+  port: 80
+
+ingress:
+  enabled: true
+  annotations: {}
+  path: /
+  host: _SET
+  
+resources: {}
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}

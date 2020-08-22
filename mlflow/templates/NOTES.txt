@@ -1,0 +1,3 @@
+{{- $fullName := include "mlflow.fullname" . -}}
+Fullname: {{ $fullName }}
+Ingress: http://{{ .Values.ingress.host }}{{ .Values.ingress.path }}
